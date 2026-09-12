@@ -18,5 +18,5 @@ uvicorn[standard]
 groq
 python-dotenv
 pandas
-snowflake-connector-python[secure-local-storage]
+snowflake-connector-python
 cryptography

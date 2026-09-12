@@ -26,6 +26,6 @@ services:
         value: PITWALL
       - key: SNOWFLAKE_SCHEMA
         value: PUBLIC
-      - key: SNOWFLAKE_PRIVATE_KEY
+      - key: SNOWFLAKE_PRIVATE_KEY_B64
         sync: false
     healthCheckPath: /

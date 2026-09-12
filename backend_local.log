@@ -1,0 +1,259 @@
+INFO:     Started server process [41000]
+INFO:     Waiting for application startup.
+2026-09-12 19:07:10,301  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:07:10,301  INFO  Connecting to GLOBAL Snowflake domain
+2026-09-12 19:07:12,213  INFO  === PitWall Snowflake RAG Chunk Tables ===
+2026-09-12 19:07:12,213  INFO    laps       : 30626 chunks
+2026-09-12 19:07:12,213  INFO    weather    : 443 chunks
+2026-09-12 19:07:12,213  INFO    radio      : 91 chunks
+2026-09-12 19:07:12,213  INFO    pitstops   : 1013 chunks
+2026-09-12 19:07:12,213  INFO  ====================================
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:5276 - "GET / HTTP/1.1" 200 OK
+2026-09-12 19:08:13,608  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:13,608  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5316 - "GET /schedule/next HTTP/1.1" 200 OK
+2026-09-12 19:08:13,859  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:13,859  INFO  Connecting to GLOBAL Snowflake domain
+2026-09-12 19:08:13,924  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:13,926  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5318 - "GET /standings/drivers?year=2025 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5317 - "GET /standings/constructors?year=2025 HTTP/1.1" 200 OK
+2026-09-12 19:08:14,104  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:14,104  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5317 - "GET /standings/drivers?year=2025 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5318 - "GET /schedule/next HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5317 - "GET /standings/constructors?year=2025 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5316 - "GET /races HTTP/1.1" 200 OK
+2026-09-12 19:08:16,660  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:16,661  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5316 - "GET /standings/constructors?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5317 - "GET /standings/drivers?year=2026 HTTP/1.1" 200 OK
+2026-09-12 19:08:16,776  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:16,776  INFO  Connecting to GLOBAL Snowflake domain
+2026-09-12 19:08:16,777  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:16,808  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5320 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:08:16,960  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:16,961  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5321 - "GET /weather-summary?race=Monaco%202025 HTTP/1.1" 200 OK
+2026-09-12 19:08:17,125  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:17,125  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5391 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5392 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:5318 - "GET /races HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5321 - "GET /weather-summary?race=Monaco%202025 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5319 - "GET /race-stats?race=Monaco%202025 HTTP/1.1" 200 OK
+2026-09-12 19:08:18,027  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:18,027  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5320 - "GET /status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5317 - "GET /weather-summary?race=Austria%202026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5319 - "GET /race-stats?race=Monaco%202025 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:5316 - "GET /race-stats?race=Austria%202026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2636 - "GET /schedule?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2637 - "GET /schedule/next HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2636 - "GET /schedule?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2637 - "GET /schedule/next HTTP/1.1" 200 OK
+2026-09-12 19:08:40,969  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:40,969  INFO  Connecting to GLOBAL Snowflake domain
+2026-09-12 19:08:40,969  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:41,000  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:2660 - "GET /standings/drivers?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2663 - "GET /standings/constructors?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2660 - "GET /standings/drivers?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2663 - "GET /standings/constructors?year=2026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2636 - "GET /race-results?race=Australia%202026 HTTP/1.1" 200 OK
+2026-09-12 19:08:49,506  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:49,507  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:2636 - "GET /race-results?race=Australia%202026 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:2637 - "GET /race-stats?race=Australia%202026 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 421, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 62, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 2697, in app
+    await route.handle(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 1778, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 2752, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 1798, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 1277, in handle
+    await app(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 156, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 142, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 704, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 352, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\api\routes\race_stats.py", line 190, in get_race_stats
+    grid_position=int(pos), driver=drv, full_name=name, team=team,
+                  ^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+2026-09-12 19:08:51,845  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:08:51,845  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:2636 - "GET /race-stats?race=Australia%202026 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 421, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 62, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 2697, in app
+    await route.handle(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 1778, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 2752, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 1798, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 1277, in handle
+    await app(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 156, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 142, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 704, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\fastapi\routing.py", line 352, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PitWall Snowflake\PitWall-Snowflake\api\routes\race_stats.py", line 190, in get_race_stats
+    grid_position=int(pos), driver=drv, full_name=name, team=team,
+                  ^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+INFO:     127.0.0.1:2697 - "OPTIONS /ask HTTP/1.1" 200 OK
+2026-09-12 19:09:12,149  INFO  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-12 19:09:12,236  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:09:12,237  INFO  Connecting to GLOBAL Snowflake domain
+2026-09-12 19:09:12,279  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:09:12,279  INFO  Connecting to GLOBAL Snowflake domain
+2026-09-12 19:09:13,523  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:09:13,524  INFO  Connecting to GLOBAL Snowflake domain
+[INFO] retrieve (snowflake): searching ['laps', 'pitstops'] for: 'Give the top 5 leaderboards for this race' (scoped to race='Australia', year=2026)
+[INFO] retrieve (snowflake): returned 0 chunk(s) (threshold=0.5)
+INFO:     127.0.0.1:2714 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:09:14,928  INFO  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-12 19:09:15,329  INFO  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-09-12 19:09:15,373  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:09:15,373  INFO  Connecting to GLOBAL Snowflake domain
+2026-09-12 19:09:17,407  INFO  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:2697 - "POST /ask HTTP/1.1" 200 OK
+2026-09-12 19:10:14,500  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:10:14,502  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:11717 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:11:15,275  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:11:15,276  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5413 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:12:16,298  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:12:16,298  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:8408 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:13:17,087  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:13:17,087  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:3685 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:14:17,114  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:14:17,114  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:10067 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:15:18,115  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:15:18,115  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:5884 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:16:18,131  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:16:18,131  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:14413 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:17:18,866  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:17:18,866  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:14481 - "GET /status HTTP/1.1" 200 OK
+2026-09-12 19:18:19,607  INFO  Snowflake Connector for Python Version: 4.7.3, Python Version: 3.12.4, Platform: Windows-11-10.0.26100-SP0
+2026-09-12 19:18:19,608  INFO  Connecting to GLOBAL Snowflake domain
+INFO:     127.0.0.1:2213 - "GET /status HTTP/1.1" 200 OK

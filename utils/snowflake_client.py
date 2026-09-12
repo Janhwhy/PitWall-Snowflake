@@ -15,6 +15,7 @@ Requires these vars in .env (see .env.example):
     SNOWFLAKE_PRIVATE_KEY_PATH   -- path to the unencrypted PKCS8 .p8 file
 """
 
+import base64
 import os
 import pathlib
 
@@ -30,19 +31,29 @@ ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 def _load_private_key_bytes() -> bytes:
     """
-    Load the key-pair-auth private key from either a local file
-    (SNOWFLAKE_PRIVATE_KEY_PATH — local dev, the file is git-ignored) or
-    raw PEM content in an env var (SNOWFLAKE_PRIVATE_KEY — for deploy
-    targets like Render, where git-ignored files never reach the build).
+    Load the key-pair-auth private key, preferring (in order):
+      1. SNOWFLAKE_PRIVATE_KEY_B64 — the .p8 file's bytes, base64-encoded
+         into one line. Use this for platforms like Render whose env var
+         UI flattens/strips newlines from multi-line values, which
+         corrupts a raw pasted PEM (breaks its line framing).
+      2. SNOWFLAKE_PRIVATE_KEY — raw PEM content, for env var UIs that do
+         preserve newlines.
+      3. SNOWFLAKE_PRIVATE_KEY_PATH — local file path (local dev; the file
+         itself is git-ignored so never reaches a deploy target this way).
     """
+    b64_pem = os.getenv("SNOWFLAKE_PRIVATE_KEY_B64")
     raw_pem = os.getenv("SNOWFLAKE_PRIVATE_KEY")
-    if raw_pem:
+
+    if b64_pem:
+        pem_bytes = base64.b64decode(b64_pem)
+    elif raw_pem:
         pem_bytes = raw_pem.encode("utf-8").replace(b"\\n", b"\n")
     else:
         key_path = os.getenv("SNOWFLAKE_PRIVATE_KEY_PATH")
         if not key_path:
             raise ValueError(
-                "Set either SNOWFLAKE_PRIVATE_KEY (raw PEM) or "
+                "Set one of SNOWFLAKE_PRIVATE_KEY_B64 (base64), "
+                "SNOWFLAKE_PRIVATE_KEY (raw PEM), or "
                 "SNOWFLAKE_PRIVATE_KEY_PATH (file path) in .env"
             )
         with open(ROOT_DIR / key_path, "rb") as f:
