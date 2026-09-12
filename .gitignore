@@ -10,6 +10,7 @@ exports/
 # DB_BACKEND=sqlite fallback paths.
 vectorstore/
 data/pitwall.db
+backend_local.log
 
 # Frontend
 node_modules/
