@@ -1,43 +1,45 @@
 """
 status.py
 ---------
-GET /status route — reports the number of chunks in each ChromaDB collection.
+GET /status route — reports the number of chunks backing each Snowflake
+Cortex Search service.
 """
 
 from fastapi import APIRouter
 from pydantic import BaseModel
 
 from api.models import StatusResponse
-from utils.vectorstore import (
-    get_laps_collection,
-    get_weather_collection,
-    get_radio_collection,
-    get_pitstops_collection,
-)
+from utils.snowflake_client import get_connection
 
 router = APIRouter()
+
+_CHUNK_TABLES = {"laps": "laps_chunks", "weather": "weather_chunks",
+                 "radio": "radio_chunks", "pitstops": "pitstops_chunks"}
 
 
 class F1DashStatusResponse(BaseModel):
     status: str
 
 
-@router.get("/status", response_model=StatusResponse, summary="Vector-store health check")
+@router.get("/status", response_model=StatusResponse, summary="RAG chunk-table health check")
 def get_status() -> StatusResponse:
     """
-    Query every ChromaDB collection and return the current chunk counts.
+    Query every Snowflake RAG chunk table and return the current row counts.
 
     Returns
     -------
     StatusResponse
         A mapping of collection name → number of stored chunks.
     """
-    collections = {
-        "laps": get_laps_collection().count(),
-        "weather": get_weather_collection().count(),
-        "radio": get_radio_collection().count(),
-        "pitstops": get_pitstops_collection().count(),
-    }
+    conn = get_connection()
+    try:
+        cursor = conn.cursor()
+        collections = {}
+        for name, table in _CHUNK_TABLES.items():
+            cursor.execute(f"SELECT COUNT(*) FROM {table}")
+            collections[name] = cursor.fetchone()[0]
+    finally:
+        conn.close()
     return StatusResponse(collections=collections)
 
 

@@ -9,3 +9,5 @@ groq
 fastapi
 uvicorn[standard]
 pandas
+snowflake-connector-python[secure-local-storage]
+cryptography

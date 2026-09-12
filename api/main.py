@@ -63,22 +63,23 @@ app.include_router(standings.router, tags=["Standings"])
 # ── Startup event ───────────────────────────────────────────────────────────
 @app.on_event("startup")
 async def log_collection_counts() -> None:
-    """Log the number of chunks in each ChromaDB collection on startup."""
-    from utils.vectorstore import (
-        get_laps_collection,
-        get_weather_collection,
-        get_radio_collection,
-        get_pitstops_collection,
-    )
+    """Log the number of chunks in each Snowflake RAG chunk table on startup."""
+    from utils.snowflake_client import get_connection
 
-    counts = {
-        "laps": get_laps_collection().count(),
-        "weather": get_weather_collection().count(),
-        "radio": get_radio_collection().count(),
-        "pitstops": get_pitstops_collection().count(),
-    }
+    tables = {"laps": "laps_chunks", "weather": "weather_chunks",
+              "radio": "radio_chunks", "pitstops": "pitstops_chunks"}
 
-    logger.info("=== PitWall ChromaDB Collections ===")
+    conn = get_connection()
+    try:
+        cursor = conn.cursor()
+        counts = {}
+        for name, table in tables.items():
+            cursor.execute(f"SELECT COUNT(*) FROM {table}")
+            counts[name] = cursor.fetchone()[0]
+    finally:
+        conn.close()
+
+    logger.info("=== PitWall Snowflake RAG Chunk Tables ===")
     for name, count in counts.items():
         logger.info("  %-10s : %d chunks", name, count)
     logger.info("====================================")

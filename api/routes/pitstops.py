@@ -8,19 +8,14 @@ Pit-lane duration = next lap's PitOutTime minus this lap's PitInTime, same
 approach as the fastest-pitstop calculation in race_stats.py.
 """
 
-import pathlib
-import sqlite3
-
 import pandas as pd
 from fastapi import APIRouter
 
 from api.models import PitStopLogEntry, PitStopLogResponse
 from api.race_utils import parse_race_label
+from utils.snowflake_client import get_connection
 
 router = APIRouter()
-
-ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
-DB_PATH = ROOT_DIR / "data" / "pitwall.db"
 
 
 def _seconds(raw) -> float | None:
@@ -42,7 +37,7 @@ def get_pit_stops(race: str = "Monaco 2025") -> PitStopLogResponse:
     if not race_name or not year:
         return response
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_connection()
     cursor = conn.cursor()
     params = (race_name, year)
 
@@ -53,7 +48,7 @@ def get_pit_stops(race: str = "Monaco 2025") -> PitStopLogResponse:
         JOIN drivers d ON d.Driver = p.Driver AND d.Race = p.Race AND d.Year = p.Year
         LEFT JOIN laps l2 ON l2.Driver = p.Driver AND l2.Race = p.Race AND l2.Year = p.Year
                           AND l2.LapNumber = p.LapNumber + 1
-        WHERE p.Race = ? AND p.Year = ?
+        WHERE p.Race = %s AND p.Year = %s
         ORDER BY p.LapNumber ASC
         """,
         params,

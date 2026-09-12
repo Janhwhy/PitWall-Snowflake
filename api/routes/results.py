@@ -10,18 +10,13 @@ enough of the race to be classified). "Laps down" status is derived by
 comparing each driver's completed lap count to the race leader's.
 """
 
-import pathlib
-import sqlite3
-
 from fastapi import APIRouter
 
 from api.models import RaceResultRow, RaceResultsResponse
 from api.race_utils import parse_race_label
+from utils.snowflake_client import get_connection
 
 router = APIRouter()
-
-ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
-DB_PATH = ROOT_DIR / "data" / "pitwall.db"
 
 
 @router.get("/race-results", response_model=RaceResultsResponse, summary="Full race classification")
@@ -36,7 +31,7 @@ def get_race_results(race: str = "Monaco 2025") -> RaceResultsResponse:
     if not race_name or not year:
         return response
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_connection()
     cursor = conn.cursor()
     params = (race_name, year)
 
@@ -45,7 +40,7 @@ def get_race_results(race: str = "Monaco 2025") -> RaceResultsResponse:
         SELECT d.Driver, d.FullName, d.Team, d.FinishPosition, COUNT(l.LapNumber) AS laps_completed
         FROM drivers d
         LEFT JOIN laps l ON l.Driver = d.Driver AND l.Race = d.Race AND l.Year = d.Year
-        WHERE d.Race = ? AND d.Year = ?
+        WHERE d.Race = %s AND d.Year = %s
         GROUP BY d.Driver, d.FullName, d.Team, d.FinishPosition
         ORDER BY d.FinishPosition ASC
         """,
@@ -56,7 +51,7 @@ def get_race_results(race: str = "Monaco 2025") -> RaceResultsResponse:
     cursor.execute(
         """
         SELECT Driver FROM laps
-        WHERE Race = ? AND Year = ? AND LapTimeSeconds IS NOT NULL
+        WHERE Race = %s AND Year = %s AND LapTimeSeconds IS NOT NULL
         ORDER BY LapTimeSeconds ASC LIMIT 1
         """,
         params,

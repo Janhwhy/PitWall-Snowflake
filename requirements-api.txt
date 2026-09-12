@@ -5,19 +5,18 @@
 # API imports. Deploying with this file instead keeps the Render build
 # smaller/faster and the runtime memory footprint lower.
 #
-# IMPORTANT: install CPU-only torch BEFORE this file (see render.yaml's
-# buildCommand). On Linux, plain `pip install sentence-transformers` pulls
-# torch's default CUDA build (multi-GB, drags in nvidia-cublas/cudnn/etc.)
-# which alone blows past a 512MB Render instance. Installing
-# `torch --index-url https://download.pytorch.org/whl/cpu` first makes
-# sentence-transformers' install see torch's requirement already satisfied
-# and skip the CUDA build.
+# chromadb / sentence-transformers / torch were dropped here after the
+# Snowflake migration — Cortex Search embeds server-side now, so the API
+# no longer needs a local embedding model. They (and the CPU-only torch
+# preinstall step) only remain in requirements.txt, for the RAG_BACKEND=
+# chromadb local fallback (utils/retriever_chromadb.py) — never imported
+# in production.
 #
 # Re-run ingest scripts locally with `pip install -r requirements.txt`.
 fastapi
 uvicorn[standard]
-chromadb
-sentence-transformers
 groq
 python-dotenv
 pandas
+snowflake-connector-python[secure-local-storage]
+cryptography

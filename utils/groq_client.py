@@ -8,7 +8,7 @@ user prompt strings and returns the model's reply as a plain string.
 
 Model
 -----
-    llama-3.1-70b-versatile   (Groq-hosted, fast inference)
+    openai/gpt-oss-20b   (Groq-hosted, fast inference)
 
 Configuration
 -------------
@@ -42,7 +42,7 @@ ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 load_dotenv(ROOT_DIR / ".env")
 
 # ── Constants ────────────────────────────────────────────────────────────────
-DEFAULT_MODEL      = "llama-3.1-8b-instant"
+DEFAULT_MODEL      = "openai/gpt-oss-20b"
 DEFAULT_MAX_TOKENS = 1_024
 
 
@@ -89,7 +89,7 @@ def ask_groq(
     user_prompt : str
         The user-role message containing retrieved context and the question.
     model : str
-        Groq model identifier.  Defaults to ``"llama-3.1-70b-versatile"``.
+        Groq model identifier.  Defaults to ``"openai/gpt-oss-20b"``.
     max_tokens : int
         Upper bound on the number of tokens the model may generate.
         Defaults to 1 024.

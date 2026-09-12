@@ -5,18 +5,13 @@ GET /weather-summary route — averaged weather conditions for a race session,
 computed directly via SQL against pitwall.db: no LLM involved.
 """
 
-import pathlib
-import sqlite3
-
 from fastapi import APIRouter
 
 from api.models import WeatherSummaryResponse
 from api.race_utils import parse_race_label
+from utils.snowflake_client import get_connection
 
 router = APIRouter()
-
-ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
-DB_PATH = ROOT_DIR / "data" / "pitwall.db"
 
 
 @router.get("/weather-summary", response_model=WeatherSummaryResponse, summary="Averaged race-session weather")
@@ -28,13 +23,13 @@ def get_weather_summary(race: str = "Monaco 2025") -> WeatherSummaryResponse:
     if not race_name or not year:
         return response
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
         """
         SELECT AVG(AirTemp), AVG(TrackTemp), AVG(Humidity), AVG(WindSpeed), AVG(WindDirection),
                100.0 * SUM(Rainfall) / COUNT(*)
-        FROM weather WHERE Race = ? AND Year = ?
+        FROM weather WHERE Race = %s AND Year = %s
         """,
         (race_name, year),
     )
@@ -48,7 +43,7 @@ def get_weather_summary(race: str = "Monaco 2025") -> WeatherSummaryResponse:
         response.avg_track_temp = round(track, 1)
         response.avg_humidity = round(humidity, 1)
         response.avg_wind_speed = round(wind_speed, 1)
-        response.avg_wind_direction = round(wind_dir, 0)
-        response.rain_probability_pct = round(rain_pct, 1)
+        response.avg_wind_direction = round(float(wind_dir), 0)
+        response.rain_probability_pct = round(float(rain_pct), 1)
 
     return response

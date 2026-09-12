@@ -9,16 +9,15 @@ never drifts from what the backend can actually answer questions about.
 
 import json
 import pathlib
-import sqlite3
 
 from fastapi import APIRouter
 
 from api.models import RaceInfo, RacesResponse
+from utils.snowflake_client import get_connection
 
 router = APIRouter()
 
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
-DB_PATH = ROOT_DIR / "data" / "pitwall.db"
 
 
 @router.get("/races", response_model=RacesResponse, summary="List races with ingested data")
@@ -33,9 +32,9 @@ def get_races() -> RacesResponse:
     that haven't happened yet (or failed ingestion) are never listed.
     """
     try:
-        conn = sqlite3.connect(DB_PATH)
+        conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT Race, Year FROM laps;")
+        cursor.execute("SELECT DISTINCT Race, Year FROM laps")
         available = set(cursor.fetchall())
         conn.close()
     except Exception:

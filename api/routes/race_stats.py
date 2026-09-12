@@ -10,9 +10,6 @@ Unlike /ask, this never calls an LLM — these are exact facts, not open-ended
 questions, so a direct query is both faster and can't hallucinate.
 """
 
-import pathlib
-import sqlite3
-
 import pandas as pd
 from fastapi import APIRouter
 
@@ -26,11 +23,9 @@ from api.models import (
     RaceStatsResponse,
 )
 from api.race_utils import parse_race_label
+from utils.snowflake_client import get_connection
 
 router = APIRouter()
-
-ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
-DB_PATH = ROOT_DIR / "data" / "pitwall.db"
 
 
 def _seconds(raw) -> float | None:
@@ -66,7 +61,7 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
     if not race_name or not year:
         return response
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_connection()
     cursor = conn.cursor()
     params = (race_name, year)
 
@@ -76,8 +71,8 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
         SELECT l.Driver, d.FullName, d.Team, l.Position
         FROM laps l
         JOIN drivers d ON d.Driver = l.Driver AND d.Race = l.Race AND d.Year = l.Year
-        WHERE l.Race = ? AND l.Year = ?
-          AND l.LapNumber = (SELECT MAX(LapNumber) FROM laps WHERE Race = ? AND Year = ?)
+        WHERE l.Race = %s AND l.Year = %s
+          AND l.LapNumber = (SELECT MAX(LapNumber) FROM laps WHERE Race = %s AND Year = %s)
           AND l.Position IS NOT NULL AND l.Position <= 3
         ORDER BY l.Position ASC
         """,
@@ -97,7 +92,7 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
         SELECT l.Driver, d.FullName, d.Team, l.LapNumber, l.LapTimeSeconds
         FROM laps l
         JOIN drivers d ON d.Driver = l.Driver AND d.Race = l.Race AND d.Year = l.Year
-        WHERE l.Race = ? AND l.Year = ? AND l.LapTimeSeconds IS NOT NULL
+        WHERE l.Race = %s AND l.Year = %s AND l.LapTimeSeconds IS NOT NULL
         ORDER BY l.LapTimeSeconds ASC
         LIMIT 1
         """,
@@ -114,7 +109,7 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
     # ── Average lap time (excludes in/out laps via a loose upper bound, so
     # pit-lane and safety-car laps don't skew it too far from a "racing" pace) ──
     cursor.execute(
-        "SELECT AVG(LapTimeSeconds) FROM laps WHERE Race = ? AND Year = ? AND LapTimeSeconds IS NOT NULL",
+        "SELECT AVG(LapTimeSeconds) FROM laps WHERE Race = %s AND Year = %s AND LapTimeSeconds IS NOT NULL",
         params,
     )
     avg_row = cursor.fetchone()
@@ -125,7 +120,7 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
     cursor.execute(
         """
         SELECT Compound, COUNT(*) AS c FROM laps
-        WHERE Race = ? AND Year = ? AND Compound IS NOT NULL
+        WHERE Race = %s AND Year = %s AND Compound IS NOT NULL
         GROUP BY Compound ORDER BY c DESC
         """,
         params,
@@ -136,7 +131,7 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
 
     # ── Pit stops: count + fastest (pit-lane time = next lap's PitOutTime
     # minus this lap's PitInTime; FastF1 records them on different laps) ────
-    cursor.execute("SELECT COUNT(*) FROM pitstops WHERE Race = ? AND Year = ?", params)
+    cursor.execute("SELECT COUNT(*) FROM pitstops WHERE Race = %s AND Year = %s", params)
     response.total_pitstops = cursor.fetchone()[0] or 0
 
     cursor.execute(
@@ -146,7 +141,7 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
         JOIN drivers d ON d.Driver = p.Driver AND d.Race = p.Race AND d.Year = p.Year
         JOIN laps l2 ON l2.Driver = p.Driver AND l2.Race = p.Race AND l2.Year = p.Year
                      AND l2.LapNumber = p.LapNumber + 1
-        WHERE p.Race = ? AND p.Year = ? AND l2.PitOutTime IS NOT NULL
+        WHERE p.Race = %s AND p.Year = %s AND l2.PitOutTime IS NOT NULL
         """,
         params,
     )
@@ -171,8 +166,8 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
         SELECT l.Driver, d.FullName, COUNT(*) AS c
         FROM laps l
         JOIN drivers d ON d.Driver = l.Driver AND d.Race = l.Race AND d.Year = l.Year
-        WHERE l.Race = ? AND l.Year = ? AND l.Position = 1
-        GROUP BY l.Driver ORDER BY c DESC
+        WHERE l.Race = %s AND l.Year = %s AND l.Position = 1
+        GROUP BY l.Driver, d.FullName ORDER BY c DESC
         """,
         params,
     )
@@ -182,7 +177,7 @@ def get_race_stats(race: str = "Monaco 2025") -> RaceStatsResponse:
     cursor.execute(
         """
         SELECT GridPosition, Driver, FullName, Team, Q1, Q2, Q3
-        FROM qualifying WHERE Race = ? AND Year = ?
+        FROM qualifying WHERE Race = %s AND Year = %s
         ORDER BY GridPosition ASC
         """,
         params,

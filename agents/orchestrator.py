@@ -8,8 +8,6 @@ unified race strategy answer using the Groq LLM.
 """
 
 import concurrent.futures
-import pathlib
-import sqlite3
 from typing import Any
 
 from agents.base_agent import BaseAgent
@@ -20,8 +18,7 @@ from agents.rivals_agent import RivalsAgent
 from agents.circuit_agent import CircuitAgent
 from agents.data_agent import DataAgent
 from utils.groq_client import ask_groq
-
-DB_PATH = pathlib.Path(__file__).resolve().parent.parent / "data" / "pitwall.db"
+from utils.snowflake_client import get_connection
 
 # Reconciling multiple (sometimes overlapping, sometimes conflicting)
 # specialist reports into one correct final answer needs more reasoning than
@@ -29,7 +26,7 @@ DB_PATH = pathlib.Path(__file__).resolve().parent.parent / "data" / "pitwall.db"
 # unambiguous data_agent answer in favour of an unrelated driver code
 # mentioned in passing by another report. Use the larger model for this
 # final synthesis step specifically.
-SYNTHESIS_MODEL = "llama-3.3-70b-versatile"
+SYNTHESIS_MODEL = "openai/gpt-oss-120b"
 
 
 class Orchestrator:
@@ -121,15 +118,15 @@ class Orchestrator:
         roughly one grid's worth of drivers).
         """
         try:
-            conn = sqlite3.connect(DB_PATH)
+            conn = get_connection()
             cursor = conn.cursor()
             if race and year:
                 cursor.execute(
-                    "SELECT DISTINCT Driver, FullName, Team FROM drivers WHERE Race = ? AND Year = ? ORDER BY Driver;",
+                    "SELECT DISTINCT Driver, FullName, Team FROM drivers WHERE Race = %s AND Year = %s ORDER BY Driver",
                     (race, year),
                 )
             else:
-                cursor.execute("SELECT DISTINCT Driver, FullName, Team FROM drivers ORDER BY Driver;")
+                cursor.execute("SELECT DISTINCT Driver, FullName, Team FROM drivers ORDER BY Driver")
             rows = cursor.fetchall()
             conn.close()
         except Exception:

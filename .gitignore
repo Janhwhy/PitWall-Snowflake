@@ -1,7 +1,15 @@
 .env
+secrets/
 cache/
 __pycache__/
 venv/
+exports/
+
+# Superseded by Snowflake (Cortex Search + structured tables) — no longer
+# read by the API, keep locally only for the RAG_BACKEND=chromadb /
+# DB_BACKEND=sqlite fallback paths.
+vectorstore/
+data/pitwall.db
 
 # Frontend
 node_modules/

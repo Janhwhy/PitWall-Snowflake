@@ -539,13 +539,21 @@ with st.sidebar:
 
     st.markdown('<div class="pw-label">Data Sources</div>', unsafe_allow_html=True)
     try:
-        from utils.vectorstore import get_laps_collection, get_weather_collection, get_radio_collection, get_pitstops_collection
+        from utils.snowflake_client import get_connection
+        conn = get_connection()
+        cursor = conn.cursor()
+        counts = {}
+        for name, table in [("Laps", "laps_chunks"), ("Weather", "weather_chunks"),
+                             ("Radio", "radio_chunks"), ("Pit Stops", "pitstops_chunks")]:
+            cursor.execute(f"SELECT COUNT(*) FROM {table}")
+            counts[name] = cursor.fetchone()[0]
+        conn.close()
         c1, c2 = st.columns(2)
-        c1.metric("Laps", get_laps_collection().count())
-        c2.metric("Weather", get_weather_collection().count())
+        c1.metric("Laps", counts["Laps"])
+        c2.metric("Weather", counts["Weather"])
         c3, c4 = st.columns(2)
-        c3.metric("Radio", get_radio_collection().count())
-        c4.metric("Pit Stops", get_pitstops_collection().count())
+        c3.metric("Radio", counts["Radio"])
+        c4.metric("Pit Stops", counts["Pit Stops"])
     except Exception:
         st.markdown("<p style='font-size:0.8rem;color:#888;'>Metrics unavailable</p>", unsafe_allow_html=True)
 
